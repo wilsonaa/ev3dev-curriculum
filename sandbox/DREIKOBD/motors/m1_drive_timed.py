@@ -80,7 +80,7 @@ Authors: David Fisher and Benjamin Dreikosen.
     time_s = 1  # Any value other than 0.
     while time_s != 0:
         sp = int(input("Enter a speed (0 to 900 dps): "))
-        Distance = int(input("Enter a time to drive (seconds): "))
+        Distance = int(input("Enter a Distance to travel (inches): "))
         left_motor.run_forever(speed_sp=sp)
         right_motor.run_forever(speed_sp=sp)
         time.sleep(time_s)
@@ -89,7 +89,7 @@ Authors: David Fisher and Benjamin Dreikosen.
 
     print("Goodbye!")
     ev3.Sound.speak("Goodbye").wait()
-  
+
 # Done: 4. Change the input questions from:
 #   Enter a speed for the left motor (0 to 900 dps):
 #   Enter a speed for the right motor (0 to 900 dps):
