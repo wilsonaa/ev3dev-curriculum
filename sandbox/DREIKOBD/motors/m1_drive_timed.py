@@ -68,36 +68,36 @@ Authors: David Fisher and Benjamin Dreikosen.
 import ev3dev.ev3 as ev3
 import time
 
-    print("--------------------------------------------")
-    print("  Timed Driving")
-    print("--------------------------------------------")
-    ev3.Sound.speak("Timed Driving").wait()
+print("--------------------------------------------")
+print("  Timed Driving")
+print("--------------------------------------------")
+ev3.Sound.speak("Timed Driving").wait()
 
-    # Connect two large motors on output ports B and C
-    left_motor = ev3.LargeMotor(ev3.OUTPUT_B)
-    right_motor = ev3.LargeMotor(ev3.OUTPUT_C)
+# Connect two large motors on output ports B and C
+left_motor = ev3.LargeMotor(ev3.OUTPUT_B)
+right_motor = ev3.LargeMotor(ev3.OUTPUT_C)
 
-    # Check that the motors are actually connected
-    assert left_motor.connected
-    assert right_motor.connected
+# Check that the motors are actually connected
+assert left_motor.connected
+assert right_motor.connected
 
-    time_s = 1  # Any value other than 0.
-    while time_s != 0:
-        sp = int(input("Enter a speed (0 to 900 dps): "))
-        Distance = int(input("Enter a Distance to travel (inches): "))
-        if sp == 0:
-            break
-        if Distance == 0:
-            break
-        time_s = (Distance / .0104)/ sp
-        left_motor.run_forever(speed_sp=sp)
-        right_motor.run_forever(speed_sp=sp)
-        time.sleep(time_s)
-        left_motor.stop()
-        right_motor.stop(stop_action="brake")
+time_s = 1  # Any value other than 0.
+while time_s != 0:
+    sp = int(input("Enter a speed (0 to 900 dps): "))
+    Distance = int(input("Enter a Distance to travel (inches): "))
+    if sp == 0:
+        break
+    if Distance == 0:
+        break
+    time_s = (Distance / .0104)/ sp
+    left_motor.run_forever(speed_sp=sp)
+    right_motor.run_forever(speed_sp=sp)
+    time.sleep(time_s)
+    left_motor.stop()
+    right_motor.stop(stop_action="brake")
 
-    print("Goodbye!")
-    ev3.Sound.speak("Goodbye").wait()
+print("Goodbye!")
+ev3.Sound.speak("Goodbye").wait()
 
 # Done: 4. Change the input questions from:
 #   Enter a speed for the left motor (0 to 900 dps):
