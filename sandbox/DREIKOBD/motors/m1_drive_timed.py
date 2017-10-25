@@ -81,6 +81,10 @@ Authors: David Fisher and Benjamin Dreikosen.
     while time_s != 0:
         sp = int(input("Enter a speed (0 to 900 dps): "))
         Distance = int(input("Enter a Distance to travel (inches): "))
+        if sp == 0:
+            break
+        if Distance == 0:
+            break
         time_s = Distance * .0104
         left_motor.run_forever(speed_sp=sp)
         right_motor.run_forever(speed_sp=sp)
@@ -98,7 +102,7 @@ Authors: David Fisher and Benjamin Dreikosen.
 # to:
 #   Enter a speed (0 to 900 dps):
 #   Distance to travel (inches):
-# TODO: 5. Write the code necessary to make the robot drive at that speed going roughly that distance.
+# DONE: 5. Write the code necessary to make the robot drive at that speed going roughly that distance.
 #   Note, in this module, you are REQUIRED to use the pattern...
 #      run_forever()
 #      time.sleep(some_amount)
