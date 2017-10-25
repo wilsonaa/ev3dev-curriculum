@@ -64,6 +64,10 @@ Authors: David Fisher and Benjamin Dreikosen.
 #    print("  Timed Driving")
 #    print("--------------------------------------------")
 #    ev3.Sound.speak("Timed Driving").wait()
+
+import ev3dev.ev3 as ev3
+import time
+
     print("--------------------------------------------")
     print("  Timed Driving")
     print("--------------------------------------------")
@@ -108,7 +112,7 @@ Authors: David Fisher and Benjamin Dreikosen.
 #      time.sleep(some_amount)
 #      stop()
 #   You may NOT use the advanced motor commands at this time like: run_to_abs_pos, run_to_rel_pos, or run_timed.
-# TODO: 6. Modify the program so that it will exit immediately if the answer to   any   question is 0.
+# DONe: 6. Modify the program so that it will exit immediately if the answer to   any   question is 0.
 # TODO: 7. Formally test your work. When you think you have the problem complete run these tests to be sure:
 #   200 dps 24 inches (make sure it drives within 6 inches of the target distance)
 #   400 dps 24 inches (make sure it drives within 6 inches of the target distance)
