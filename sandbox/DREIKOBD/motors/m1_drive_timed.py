@@ -80,7 +80,8 @@ Authors: David Fisher and Benjamin Dreikosen.
     time_s = 1  # Any value other than 0.
     while time_s != 0:
         sp = int(input("Enter a speed (0 to 900 dps): "))
-        Distance = int(input("Enter a Distance to travel (inches): "))   
+        Distance = int(input("Enter a Distance to travel (inches): "))
+        time_s = Distance * .108
         left_motor.run_forever(speed_sp=sp)
         right_motor.run_forever(speed_sp=sp)
         time.sleep(time_s)
