@@ -46,8 +46,7 @@ time_s = 1  # Any value other than 0.
 # DONE: 3. Add a beep after the drive motors stop (see code below).  Test your code to hear the beep AFTER movement.
 #   ev3.Sound.beep().wait()
 
-ev3.Sound.beep().wait()
-
+ev3.Sound.beep()
 # TODO: 4. Instead of using the run_forever, time.sleep, stop pattern switch to using the run_to_rel_pos command.
 #   You will need to determine the position_sp value to pass into the run_to_rel_pos command as a named argument.
 #   Assume the diameter of the wheel is 1.3" (close enough).  A 1.3" diameter wheel results in approximately a 4"
@@ -65,14 +64,10 @@ ev3.Sound.beep().wait()
 #        -- stop_action
 speed_sp = int(input("Enter a speed (0 to 900 dps): "))
 Distance = int(input("Enter a Distance to travel (inches): "))
-if sp == 0:
-    break
-if Distance == 0:
-    break
 position_sp = Distance*90
-left_motor.run_to_rel_pos(position_sp,speed_sp)
-right_motor.run_to_rel_pos(position_sp,speed_sp)
-
+stop_action = ev3.Motor.STOP_ACTION_BRAKE
+left_motor.run_to_rel_pos()
+right_motor.run_to_rel_pos()
 # TODO: 5. Make sure the beep happens AFTER the motors stop.  Use the wait_while command to block code execution.
 
 # TODO: 6. Formally test your work. When you think you have the problem complete run these tests:
