@@ -89,7 +89,7 @@ while time_s != 0:
         break
     if Distance == 0:
         break
-    time_s = (Distance / .0104)/ sp
+    time_s = (Distance / .01)/ sp
     left_motor.run_forever(speed_sp=sp)
     right_motor.run_forever(speed_sp=sp)
     time.sleep(time_s)
