@@ -4,7 +4,7 @@ This module lets you practice using the encoder to determine distances while blo
 
 You will now use a run_to_rel_pos command to implement the action drive inches action.
 
-Authors: David Fisher and Ben Dreikoson.
+Authors: David Fisher and Aaron Wilson.
 """  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 # DONE: 2. Copy the contents of your m1_drive_timed.py and paste that text into this file below these comments.
@@ -26,25 +26,27 @@ assert left_motor.connected
 assert right_motor.connected
 
 time_s = 1  # Any value other than 0.
-while time_s != 0:
-    sp = int(input("Enter a speed (0 to 900 dps): "))
-    Distance = int(input("Enter a Distance to travel (inches): "))
-    if sp == 0:
-        break
-    if Distance == 0:
-        break
-    time_s = (Distance / .01)/ sp
-    left_motor.run_forever(speed_sp=sp)
-    right_motor.run_forever(speed_sp=sp)
-    time.sleep(time_s)
-    left_motor.stop()
-    right_motor.stop(stop_action="brake")
+# while time_s != 0:
+#     sp = int(input("Enter a speed (0 to 900 dps): "))
+#     Distance = int(input("Enter a Distance to travel (inches): "))
+#     if sp == 0:
+#         break
+#     if Distance == 0:
+#         break
+#     time_s = (Distance / .01)/ sp
+#     left_motor.run_forever(speed_sp=sp)
+#     right_motor.run_forever(speed_sp=sp)
+#     time.sleep(time_s)
+#     left_motor.stop()
+#     right_motor.stop(stop_action="brake")
+#
+# print("Goodbye!")
+# ev3.Sound.speak("Goodbye")
 
-print("Goodbye!")
-ev3.Sound.speak("Goodbye").wait()
-
-# TODO: 3. Add a beep after the drive motors stop (see code below).  Test your code to hear the beep AFTER movement.
+# DONE: 3. Add a beep after the drive motors stop (see code below).  Test your code to hear the beep AFTER movement.
 #   ev3.Sound.beep().wait()
+
+ev3.Sound.beep().wait()
 
 # TODO: 4. Instead of using the run_forever, time.sleep, stop pattern switch to using the run_to_rel_pos command.
 #   You will need to determine the position_sp value to pass into the run_to_rel_pos command as a named argument.
@@ -61,6 +63,15 @@ ev3.Sound.speak("Goodbye").wait()
 #        -- position_sp
 #        -- speed_sp
 #        -- stop_action
+speed_sp = int(input("Enter a speed (0 to 900 dps): "))
+Distance = int(input("Enter a Distance to travel (inches): "))
+if sp == 0:
+    break
+if Distance == 0:
+    break
+position_sp = Distance*90
+left_motor.run_to_rel_pos(position_sp,speed_sp)
+right_motor.run_to_rel_pos(position_sp,speed_sp)
 
 # TODO: 5. Make sure the beep happens AFTER the motors stop.  Use the wait_while command to block code execution.
 
