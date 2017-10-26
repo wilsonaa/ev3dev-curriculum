@@ -13,7 +13,7 @@ import ev3dev.ev3 as ev3
 import time
 
 print("--------------------------------------------")
-print("  Drive using encoders")
+print("  Drive using encoders ")
 print("--------------------------------------------")
 ev3.Sound.speak("Drive using encoders").wait()
 
