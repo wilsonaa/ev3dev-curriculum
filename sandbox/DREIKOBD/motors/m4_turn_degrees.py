@@ -13,13 +13,15 @@ Authors: David Fisher and Aaron Wilson.
 #     print("--------------------------------------------")
 #     ev3.Sound.speak("Turn degrees").wait()
 #   You will need to modify that code for this problem, but it is a handy starting point.
+import ev3dev.ev3 as ev3
+import robot_controller as robo
 
 def main():
     # --------------------------------------------------------------
     # We have already implemented this module for you.
     # There are no TODOs in the code.  Do NOT modify it.
     # You are not allowed to make any changes to this code.
-    # --------------------------------------------------------------
+    # ------------------------------\--------------------------------
     print("--------------------------------------------")
     print(" Turn degrees")
     print("--------------------------------------------")
@@ -27,14 +29,14 @@ def main():
     robot = robo.Snatch3r()
 
     while True:
-        speed_deg_per_second = int(input("Speed (0 to 900 dps): "))
+        turn_speed_sp = int(input("Speed (0 to 900 dps): "))
         if speed_deg_per_second == 0:
             break
-        inches_target = int(input("Distance (inches): "))
+        degrees_to_turn = int(input("Distance (degrees): "))
         if inches_target == 0:
             break
 
-        robot.drive_inches(inches_target, speed_deg_per_second)
+        robot.turn_degrees(degrees_to_turn, turn_speed_sp)
         ev3.Sound.beep().wait()  # Fun little beep
 
     print("Goodbye!")
