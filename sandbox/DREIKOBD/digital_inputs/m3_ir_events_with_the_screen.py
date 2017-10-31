@@ -156,7 +156,7 @@ def handle_blue_down_1(button_state, dc):
     """
     if button_state:
         display_image(dc.lcd_screen, dc.shifty_eyes)
-  
+
 
 def handle_red_up_2(button_state, dc):
     """
