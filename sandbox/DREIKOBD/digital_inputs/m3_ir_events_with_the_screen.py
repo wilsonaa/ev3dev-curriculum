@@ -91,7 +91,7 @@ def main():
     rc2.on_red_up = lambda state: handle_red_up_2(state, dc)
     rc3.on_red_up = lambda state: handle_red_up_3(state, dc)
     rc4.on_red_up = lambda state: handle_red_up_4(state, dc)
-    
+
     # Buttons on EV3
     btn = ev3.Button()
     btn.on_backspace = lambda state: handle_shutdown(state, dc)
