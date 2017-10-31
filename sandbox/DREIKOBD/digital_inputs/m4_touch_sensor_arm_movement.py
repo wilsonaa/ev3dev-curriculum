@@ -76,7 +76,7 @@ def arm_calibration(arm_motor, touch_sensor):
     arm_motor.stop(stop_action=ev3.Motor.STOP_ACTION_BRAKE)
 
     arm_revolutions_for_full_range = 14.2 * 360
-    arm_motor.run_to_rel_pos(position_sp=arm_revolutions_for_full_range)
+    arm_motor.run_to_rel_pos(position_sp=-arm_revolutions_for_full_range)
     arm_motor.wait_while(ev3.Motor.STATE_HOLDING)
 
     arm_motor.position = 0  # Calibrate the down position as 0 (this line is correct as is).
@@ -117,7 +117,8 @@ def arm_down(arm_motor):
     # Make a beep sound
 
     # Code that attempts to do this task but has bugs.  Fix them.
-    arm_motor.run_to_abs_pos(position_sp=0, speed_sp=MAX_SPEED)
+    arm_revolutions_for_full_range = 14.2 * 360
+    arm_motor.run_to_rel_pos(position_sp=-arm_revolutions_for_full_range)
     arm_motor.wait_while(ev3.Motor.STATE_HOLDING)  # Blocks until the motor finishes running
 
     # TODO: 6. After you fix the bugs in the three arm movement commands demo your code to a TA or instructor.
