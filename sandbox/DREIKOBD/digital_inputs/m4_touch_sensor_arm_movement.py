@@ -105,7 +105,7 @@ def arm_up(arm_motor, touch_sensor):
     while touch_sensor.is_pressed:
         time.sleep(0.01)
     arm_motor.stop(stop_action=ev3.Motor.STOP_ACTION_BRAKE)
-
+    arm_motor.wait_while(ev3.Motor.STATE_STALLED)
 
 def arm_down(arm_motor):
     """
