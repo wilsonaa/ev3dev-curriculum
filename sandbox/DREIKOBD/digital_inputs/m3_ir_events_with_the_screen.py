@@ -14,7 +14,7 @@ until you complete this problem.
 To stop the Brickman interface type:
   sudo chvt 6
 When prompted for the password - C$$E120
-
+ 
 To restart the Brickman interface after you complete this problem type:
   sudo chvt 1
 Which will probably not require you to type the password since sudo was just run earlier.
@@ -97,12 +97,14 @@ def main():
     btn.on_backspace = lambda state: handle_shutdown(state, dc)
 
     while dc.running:
-        # TODO: 4. Call the .process() method on your channel 1 RemoveControl object, then review and run your code.
+        # DONE: 4. Call the .process() method on your channel 1 RemoveControl object, then review and run your code.
         #   Review the handle functions below to see how they draw to the screen.  They are already finished.
-
-        # TODO: 6. Call the .process() method on your channel 2 - 4 RemoveControl objects and demo your code.
+        rc1.process()
+        # DONE: 6. Call the .process() method on your channel 2 - 4 RemoveControl objects and demo your code.
         #   Review the handle functions below to see how they draw to the screen.  They are already finished.
-
+        rc2.process()
+        rc3.process()
+        rc4.process()
         # TODO: 7. Call over a TA or instructor to sign your team's checkoff sheet and do a code review.
         #
         # Observations you should make, IR buttons work exactly like buttons on the EV3.
