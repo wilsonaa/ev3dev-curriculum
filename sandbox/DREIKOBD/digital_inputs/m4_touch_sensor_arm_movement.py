@@ -31,16 +31,16 @@ def main():
         command_to_run = input("Enter c (for calibrate), u (for up), d (for down), or q (for quit): ")
         if command_to_run == 'c':
             print("Calibrate the arm")
-            print("TODO: 3 is to delete this print statement, uncomment the line below, and implement that function.")
-            # arm_calibration(arm_motor, touch_sensor)
+            #print("TODO: 3 is to delete this print statement, uncomment the line below, and implement that function.")
+            arm_calibration(arm_motor, touch_sensor)
         elif command_to_run == 'u':
             print("Move the arm to the up position")
-            print("TODO: 4 is to delete this print statement, uncomment the line below, and implement that function.")
-            # arm_up(arm_motor, touch_sensor)
+            #print("TODO: 4 is to delete this print statement, uncomment the line below, and implement that function.")
+            arm_up(arm_motor, touch_sensor)
         elif command_to_run == 'd':
             print("Move the arm to the down position")
-            print("TODO: 5 is to delete this print statement, uncomment the line below, and implement that function.")
-            # arm_down(arm_motor)
+            #print("TODO: 5 is to delete this print statement, uncomment the line below, and implement that function.")
+            arm_down(arm_motor)
         elif command_to_run == 'q':
             break
         else:
@@ -101,7 +101,7 @@ def arm_up(arm_motor, touch_sensor):
     # Make a beep sound
 
     # Code that attempts to do this task but has many bugs.  Fix them!
-    arm_motor.run_to_forever(speed_sp=900)
+    arm_motor.run_forever(speed_sp=900)
     while touch_sensor.is_pressed:
         time.sleep(0.01)
     arm_motor.stop(stop_action=ev3.Motor.STOP_ACTION_BRAKE)
