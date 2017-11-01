@@ -71,14 +71,20 @@ def arm_calibration(arm_motor, touch_sensor):
 
     # Code that attempts to do this task but has MANY bugs (nearly 1 on every line).  Fix them!
     arm_motor.run_forever(speed_sp=900)
-    while not touch_sensor:
+    while not touch_sensor.is_pressed:
         time.sleep(0.01)
-    arm_motor.stop(stop_action=ev3.Motor.STOP_ACTION_BRAKE)
-
+        break
+    arm_motor.stop(stop_action = ev3.Motor.STOP_ACTION_BRAKE)
+    ev3.Sound.beep().wait()
+    print('1')
     arm_revolutions_for_full_range = 14.2 * 360
-    arm_motor.run_to_rel_pos(position_sp=-arm_revolutions_for_full_range)
+    print('2')
+    arm_motor.run_to_abs_pos(position_sp=-arm_revolutions_for_full_range)
+    print('3')
     arm_motor.wait_while(ev3.Motor.STATE_HOLDING)
-
+    print('4')
+    ev3.Sound.beep().wait()
+    print('5')
     arm_motor.position = 0  # Calibrate the down position as 0 (this line is correct as is).
 
 
@@ -99,7 +105,7 @@ def arm_up(arm_motor, touch_sensor):
 
     # Code that attempts to do this task but has many bugs.  Fix them!
     arm_motor.run_forever(speed_sp=900)
-    while touch_sensor.is_pressed:
+    while not touch_sensor.is_pressed:
         time.sleep(0.01)
     arm_motor.stop(stop_action=ev3.Motor.STOP_ACTION_BRAKE)
     arm_motor.wait_while(ev3.Motor.STATE_HOLDING)
@@ -118,7 +124,7 @@ def arm_down(arm_motor):
 
     # Code that attempts to do this task but has bugs.  Fix them.
     arm_revolutions_for_full_range = 14.2 * 360
-    arm_motor.run_to_rel_pos(position_sp=-arm_revolutions_for_full_range)
+    arm_motor.run_to_abs_pos(position_sp=-arm_revolutions_for_full_range)
     arm_motor.wait_while(ev3.Motor.STATE_HOLDING)  # Blocks until the motor finishes running
 
     # TODO: 6. After you fix the bugs in the three arm movement commands demo your code to a TA or instructor.
