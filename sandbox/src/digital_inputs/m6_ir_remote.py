@@ -25,8 +25,8 @@
     -- Pressing the Back button will allow your program to end.  It should stop motors, turn on both green LEDs, and
        then print and say Goodbye.  You will need to implement a new robot method called shutdown to handle this task.
 
-Authors: David Fisher and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+Authors: David Fisher and Benjamin Dreikosen and Aaron Wilson.
+"""  # Done: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import ev3dev.ev3 as ev3
 import time
@@ -58,9 +58,11 @@ def main():
     robot = robo.Snatch3r()
     dc = DataContainer()
 
-    # TODO: 4. Add the necessary IR handler callbacks as per the instructions above.
+    # TODO: 4. Add the   necessary IR handler callbacks as per the instructions above.
     # Remote control channel 1 is for driving the crawler tracks around (none of these functions exist yet below).
     # Remote control channel 2 is for moving the arm up and down (all of these functions already exist below).
+    rc1 = ev3.RemoteControl(channel=1)
+    rc2 = ev3.RemoteControl(channel=2)
 
     # For our standard shutdown button.
     btn = ev3.Button()
