@@ -62,24 +62,23 @@ def main():
     # Remote control channel 1 is for driving the crawler tracks around (none of these functions exist yet below).
     # Remote control channel 2 is for moving the arm up and down (all of these functions already exist below).
     rc1 = ev3.RemoteControl(channel=1)
-    rc1.on_blue_up = lambda state: handle_blue_up_1(state, dc)
-    rc1.on_blue_down = lambda state: handle_blue_down_1(state, dc)
-    rc1.on_red_down = lambda state: handle_red_down_1(state, dc)
-    rc1.on_red_up = lambda state: handle_red_up_1(state, dc)
-    print('TEST 1')
+    rc1.on_blue_up = lambda state: handle_blue_up_1(state, robot)
+    rc1.on_blue_down = lambda state: handle_blue_down_1(state, robot)
+    rc1.on_red_down = lambda state: handle_red_down_1(state, robot)
+    rc1.on_red_up = lambda state: handle_red_up_1(state, robot)
+
     rc2 = ev3.RemoteControl(channel=2)
-    rc2.on_blue_up = lambda state: handle_calibrate_button(state,dc)
+    rc2.on_blue_up = lambda state: handle_calibrate_button(state,robot)
     rc2.on_blue_down = lambda state: handle_shutdown(state,dc)
-    rc2.on_red_down = lambda state: handle_arm_down_button(state, dc)
-    rc2.on_red_up = lambda state: handle_arm_up_button(state, dc)
-    print('TEST 2')
+    rc2.on_red_down = lambda state: handle_arm_down_button(state, robot)
+    rc2.on_red_up = lambda state: handle_arm_up_button(state, robot)
+
 
     # For our standard shutdown button.
     btn = ev3.Button()
     btn.on_backspace = lambda state: handle_shutdown(state, dc)
-    print('TEST 3')
-    robot.arm_up()  # Start with an arm calibration in this program.
-    robot.arm_down()
+
+    # robot.arm_calibration()
     while dc.running:
         # DONE: 5. Process the RemoteControl objects.
         btn.process()
@@ -105,39 +104,40 @@ def main():
 #
 # Observations you should make, IR buttons are a fun way to control the robot.
 
-def handle_blue_up_1(button_state, dc,robot):
+def handle_blue_up_1(button_state,robot):
 
     if button_state:
         robot.drive_right_motor(600)
         robot.led(ev3.Leds.RIGHT,ev3.Leds.GREEN)
+    else:
+        robot.stop()
+        ev3.Leds.all_off()
 
-    robot.stop(stop_action=ev3.Motor.STOP_ACTION_BRAKE)
-    ev3.Leds.all_off()
 
-
-def handle_red_up_1(button_state,dc,robot):
+def handle_red_up_1(button_state,robot):
     if button_state:
         robot.drive_left_motor(600)
-        robot.led(ev3.Motor.LEFT,ev3.Leds.GREEN)
+        robot.led(ev3.Leds.LEFT,ev3.Leds.GREEN)
+    else:
+        robot.stop()
+        ev3.Leds.all_off()
 
-    robot.stop(stop_action=ev3.Motor.STOP_ACTION_BRAKE)
-    ev3.Leds.all_off()
 
-def handle_red_down_1(button_state,dc,robot):
+def handle_red_down_1(button_state,robot):
     if button_state:
         robot.drive_left_motor(-600)
         robot.led(ev3.Leds.LEFT,ev3.Leds.RED)
-
-    robot.stop(stop_action=ev3.Motor.STOP_ACTION_BRAKE)
-    ev3.Leds.all_off()
-def handle_blue_down_1(button_state, dc,robot):
+    else:
+        robot.stop()
+        ev3.Leds.all_off()
+def handle_blue_down_1(button_state,robot):
 
     if button_state:
         robot.drive_right_motor(-600)
         robot.led(ev3.Leds.RIGHT,ev3.Leds.RED)
-
-    robot.stop(stop_action=ev3.Motor.STOP_ACTION_BRAKE)
-    ev3.Leds.all_off()
+    else:
+        robot.stop()
+        ev3.Leds.all_off()
 
 
 def handle_arm_up_button(button_state, robot):
