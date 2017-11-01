@@ -68,6 +68,10 @@ def main():
     rc1.on_red_up = lambda state: handle_red_up_1(state, dc)
 
     rc2 = ev3.RemoteControl(channel=2)
+    rc2.on_blue_up = lambda state: handle_blue_up_1(state,dc)
+    rc2.on_blue_down = lambda state: handle_blue_down_1(state,dc)
+    rc2.on_red_down = lambda state: handle_red_down_1(state, dc)
+    rc2.on_red_up = lambda state: handle_red_up_1(state, dc)
 
     # For our standard shutdown button.
     btn = ev3.Button()
