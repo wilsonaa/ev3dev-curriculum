@@ -62,6 +62,11 @@ def main():
     # Remote control channel 1 is for driving the crawler tracks around (none of these functions exist yet below).
     # Remote control channel 2 is for moving the arm up and down (all of these functions already exist below).
     rc1 = ev3.RemoteControl(channel=1)
+    rc1.on_blue_up = lambda state: handle_blue_up_1(state,dc)
+    rc1.on_blue_down = lambda state: handle_blue_down_1(state,dc)
+    rc1.on_red_down = lambda state: handle_red_down_1(state, dc)
+    rc1.on_red_up = lambda state: handle_red_up_1(state, dc)
+
     rc2 = ev3.RemoteControl(channel=2)
 
     # For our standard shutdown button.
