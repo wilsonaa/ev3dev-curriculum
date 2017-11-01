@@ -35,6 +35,12 @@ class Snatch3r(object):
         assert self.left_motor.connected
         assert self.right_motor.connected
 
+    def drive_left_motor(self,speed):
+        self.left_motor.run_forever(speed)
+
+    def drive_right_motor(self,speed):
+        self.right_motor.run_forever(speed)
+
 
     def drive_inches(self,Distance,speed):
 
@@ -90,3 +96,7 @@ class Snatch3r(object):
         self.arm_motor.run_to_abs_pos(position_sp=-arm_revolutions_for_full_range)
         self.arm_motor.wait_while(ev3.Motor.STATE_HOLDING)  # Blocks until the motor finishes running
         ev3.Sound.beep().wait()
+
+    def led(self,side,color):
+
+        ev3.Leds.set_color(ev3.Leds.side, ev3.Leds.color)

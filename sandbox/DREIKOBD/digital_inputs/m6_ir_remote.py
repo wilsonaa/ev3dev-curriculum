@@ -66,24 +66,25 @@ def main():
     rc1.on_blue_down = lambda state: handle_blue_down_1(state, dc)
     rc1.on_red_down = lambda state: handle_red_down_1(state, dc)
     rc1.on_red_up = lambda state: handle_red_up_1(state, dc)
-
+    print('TEST 1')
     rc2 = ev3.RemoteControl(channel=2)
     rc2.on_blue_up = lambda state: handle_calibrate_button(state,dc)
     rc2.on_blue_down = lambda state: handle_shutdown(state,dc)
     rc2.on_red_down = lambda state: handle_arm_down_button(state, dc)
-    rc2.on_red_up = lambda state: handle_arm_up_button(arm_up(state, dc)
-
+    rc2.on_red_up = lambda state: handle_arm_up_button(state, dc)
+    print('TEST 2')
 
     # For our standard shutdown button.
     btn = ev3.Button()
     btn.on_backspace = lambda state: handle_shutdown(state, dc)
-
-    robot.arm_calibration()  # Start with an arm calibration in this program.
-
+    print('TEST 3')
+    robot.arm_up()  # Start with an arm calibration in this program.
+    robot.arm_down()
     while dc.running:
         # DONE: 5. Process the RemoteControl objects.
         btn.process()
-        time.sleep(0.01)
+        time.sleep(5)
+        print('TEST 4...')
 
     # DONE: 2. Have everyone talk about this problem together then pick one  member to modify libs/robot_controller.py
     # as necessary to implement the method below as per the instructions in the opening doc string. Once the code has
@@ -102,6 +103,44 @@ def main():
 # TODO: 7. When your program is complete, call over a TA or instructor to sign your checkoff sheet and do a code review.
 #
 # Observations you should make, IR buttons are a fun way to control the robot.
+
+def handle_blue_up_1(button_state, dc,robot):
+
+    if button_state:
+        robot.drive_right_motor(600)
+        robot.led(RIGHT,GREEN)
+
+    robot.stop(stop_action=ev3.Motor.STOP_ACTION_BRAKE)
+    ev3.Leds.all_off()
+
+
+def handle_red_up_1(button_state,dc,robot):
+    if button_state:
+        robot.drive_left_motor(600)
+        robot.led(LEFT,GREEN)
+
+    robot.stop(stop_action=ev3.Motor.STOP_ACTION_BRAKE)
+    ev3.Leds.all_off()
+
+def handle_red_down_1(button_state,dc,robot):
+    if button_state:
+        robot.drive_left_motor(-600)
+        robot.led(LEFT,RED)
+
+    robot.stop(stop_action=ev3.Motor.STOP_ACTION_BRAKE)
+    ev3.Leds.all_off()
+def handle_blue_down_1(button_state, dc,robot):
+
+    if button_state:
+        robot.drive_right_motor(-600)
+        robot.led(RIGHT,RED)
+
+    robot.stop(stop_action=ev3.Motor.STOP_ACTION_BRAKE)
+    ev3.Leds.all_off()
+
+
+
+
 
 
 def handle_arm_up_button(button_state, robot):
