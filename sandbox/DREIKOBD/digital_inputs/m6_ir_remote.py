@@ -83,8 +83,9 @@ def main():
     while dc.running:
         # DONE: 5. Process the RemoteControl objects.
         btn.process()
-        time.sleep(5)
-        print('TEST 4...')
+        rc1.process()
+        rc2.process()
+        time.sleep(.01)
 
     # DONE: 2. Have everyone talk about this problem together then pick one  member to modify libs/robot_controller.py
     # as necessary to implement the method below as per the instructions in the opening doc string. Once the code has
@@ -108,7 +109,7 @@ def handle_blue_up_1(button_state, dc,robot):
 
     if button_state:
         robot.drive_right_motor(600)
-        robot.led(RIGHT,GREEN)
+        robot.led(ev3.Leds.RIGHT,ev3.Leds.GREEN)
 
     robot.stop(stop_action=ev3.Motor.STOP_ACTION_BRAKE)
     ev3.Leds.all_off()
@@ -117,7 +118,7 @@ def handle_blue_up_1(button_state, dc,robot):
 def handle_red_up_1(button_state,dc,robot):
     if button_state:
         robot.drive_left_motor(600)
-        robot.led(LEFT,GREEN)
+        robot.led(ev3.Motor.LEFT,ev3.Leds.GREEN)
 
     robot.stop(stop_action=ev3.Motor.STOP_ACTION_BRAKE)
     ev3.Leds.all_off()
@@ -125,7 +126,7 @@ def handle_red_up_1(button_state,dc,robot):
 def handle_red_down_1(button_state,dc,robot):
     if button_state:
         robot.drive_left_motor(-600)
-        robot.led(LEFT,RED)
+        robot.led(ev3.Leds.LEFT,ev3.Leds.RED)
 
     robot.stop(stop_action=ev3.Motor.STOP_ACTION_BRAKE)
     ev3.Leds.all_off()
@@ -133,14 +134,10 @@ def handle_blue_down_1(button_state, dc,robot):
 
     if button_state:
         robot.drive_right_motor(-600)
-        robot.led(RIGHT,RED)
+        robot.led(ev3.Leds.RIGHT,ev3.Leds.RED)
 
     robot.stop(stop_action=ev3.Motor.STOP_ACTION_BRAKE)
     ev3.Leds.all_off()
-
-
-
-
 
 
 def handle_arm_up_button(button_state, robot):

@@ -99,4 +99,4 @@ class Snatch3r(object):
 
     def led(self,side,color):
 
-        ev3.Leds.set_color(ev3.Leds.side, ev3.Leds.color)
+        ev3.Leds.set_color(side, color)
