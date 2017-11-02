@@ -53,17 +53,17 @@ def main():
     ev3.Sound.speak("Drive to the color").wait()
     print("Press Back to exit this program.")
 
-    color_sensor = ev3.ColorSensor()
+
     robot = robo.Snatch3r()
     dc = DataContainer()
 
     # For our standard shutdown button.
     btn = ev3.Button()
     # DONE: 2. Uncomment the lines below to setup event handlers for these buttons.
-    btn.on_up = lambda state: drive_to_color(state, robot, color_sensor,ev3.ColorSensor.COLOR_RED)
-    btn.on_down = lambda state: drive_to_color(state, robot,color_sensor, ev3.ColorSensor.COLOR_BLUE)
-    btn.on_left = lambda state: drive_to_color(state, robot,color_sensor, ev3.ColorSensor.COLOR_BLACK)
-    btn.on_right = lambda state: drive_to_color(state, robot,color_sensor, ev3.ColorSensor.COLOR_WHITE)
+    btn.on_up = lambda state: drive_to_color(state, robot,ev3.ColorSensor.COLOR_RED)
+    btn.on_down = lambda state: drive_to_color(state, robot, ev3.ColorSensor.COLOR_BLUE)
+    btn.on_left = lambda state: drive_to_color(state, robot, ev3.ColorSensor.COLOR_BLACK)
+    btn.on_right = lambda state: drive_to_color(state, robot, ev3.ColorSensor.COLOR_WHITE)
     btn.on_backspace = lambda state: handle_shutdown(state, dc)
 
     while dc.running:
@@ -77,7 +77,7 @@ def main():
 # ----------------------------------------------------------------------
 # Event handlers
 # ----------------------------------------------------------------------
-def drive_to_color(button_state, robot,color_sensor, color_to_seek):
+def drive_to_color(button_state, robot, color_to_seek):
     """
     When the button_state is True (pressed), drives the robot forward until the desired color is detected.
     When the color_to_seek is detected the robot stops moving forward and speaks a message.
@@ -96,13 +96,13 @@ def drive_to_color(button_state, robot,color_sensor, color_to_seek):
         #   assert self.color_sensor
         # Then here you can use a command like robot.color_sensor.color to check the value
         while True:
-            current_color = color_sensor.color
+            current_color = robot.color_sensor.color
             if current_color == color_to_seek:
                 robot.stop()
                 break
             else:
                 robot.drive_right_motor(300)
-                robot.drive_right_motor(300)
+                robot.drive_left_motor(300)
 
 
         # TODO: 4. Call over a TA or instructor to sign your team's checkoff sheet.
