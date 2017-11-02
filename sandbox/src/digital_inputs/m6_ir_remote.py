@@ -65,13 +65,13 @@ def main():
     rc1.on_blue_up = lambda state: handle_calibrate_button(state,dc)
     rc1.on_blue_down = lambda state: handle_shutdown(state,dc)
     rc1.on_red_down = lambda state: handle_arm_down_button(state, dc)
-    rc1.on_red_up = lambda state: handle_arm_up_button(arm_up(state, dc)
+    rc1.on_red_up = lambda state: handle_arm_up_button(arm_up(state, dc))
 
 
     rc2.on_blue_up = lambda state: handle_calibrate_button(state,dc)
     rc2.on_blue_down = lambda state: handle_shutdown(state,dc)
     rc2.on_red_down = lambda state: handle_arm_down_button(state, dc)
-    rc2.on_red_up = lambda state: handle_arm_up_button(arm_up(state, dc)
+    rc2.on_red_up = lambda state: handle_arm_up_button(arm_up(state, dc))
 
     # For our standard shutdown button.
     btn = ev3.Button()
