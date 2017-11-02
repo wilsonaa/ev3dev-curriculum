@@ -95,14 +95,14 @@ def seek_beacon(robot):
                 # You add more!
             if current_distance == 0:
                 return True
-            if current_heading < 0:
+            if current_heading < -2:
                 robot.drive_right_motor(400)
-                time.sleep(.2)
-                robot.stop()
-            if current_heading > 0:
+            elif current_heading > 2:
                 robot.drive_left_motor(400)
-                time.sleep(.2)
-                robot.stop()
+            else:
+                robot.drive_right_motor(400)
+                robot.drive_left_motor(400)
+
 
 
 
