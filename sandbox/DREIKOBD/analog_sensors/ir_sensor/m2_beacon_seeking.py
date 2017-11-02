@@ -93,12 +93,22 @@ def seek_beacon(robot):
                 # Close enough of a heading to move forward
                 print("On the right heading. Distance: ", current_distance)
                 # You add more!
-            if current_distance == 0:
+            if current_distance <= 3:
                 return True
             if current_heading < -2:
+                if current_heading <-10:
+                    print('Heading is too far off to fix')
+                    ev3.Sound.speak("Heading is too far off to fix")
+                    return
                 robot.drive_right_motor(400)
+                robot.drive_left_motor(-400)
             elif current_heading > 2:
+                if current_heading >10:
+                    print('Heading is too far off to fix')
+                    ev3.Sound.speak("Heading is too far off to fix")
+                    return
                 robot.drive_left_motor(400)
+                robot.drive_right_motor(-400)
             else:
                 robot.drive_right_motor(400)
                 robot.drive_left_motor(400)
