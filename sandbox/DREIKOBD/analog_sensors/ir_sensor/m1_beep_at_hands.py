@@ -28,14 +28,19 @@ def main():
     # Note, it is assumed that you have a touch_sensor property on the Snatch3r class.
     # Presumably you added this in the digital_inputs unit, if not add it now so that
     # the code below works to monitor the touch_sensor.
-
-    while not robot.touch_sensor.is_pressed:
-        # TODO: 2. Implement the module as described in the opening comment block.
+    print('Test 1')
+    while True:
+        # DONE: 2. Implement the module as described in the opening comment block.
         # It is recommended that you add to your Snatch3r class's constructor the ir_sensor, as shown
         #   self.ir_sensor = ev3.InfraredSensor()
         #   assert self.ir_sensor
         # Then here you can use a command like robot.ir_sensor.proximity
 
+        print(robot.ir_sensor.proximity)
+        robot.ir_sensor_dist()
+
+        if robot.touch_sensor.is_pressed:
+            break
         time.sleep(0.1)
 
     # TODO: 3. Call over a TA or instructor to sign your team's checkoff sheet.

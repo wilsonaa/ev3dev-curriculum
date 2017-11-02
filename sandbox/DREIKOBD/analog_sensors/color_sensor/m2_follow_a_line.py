@@ -29,7 +29,7 @@ def main():
 
     # TODO: 4: After running the code set the default white and black levels to a better initial guess.
     #   Once you have the values hardcoded to resonable numbers here you don't really need the w and b commands below.
-    white_level = 90
+    white_level = 91
     black_level = 10
     robot = robo.Snatch3r()
 
@@ -60,7 +60,7 @@ def main():
 
     print("Goodbye!")
     ev3.Sound.speak("Goodbye").wait()
-
+    follow_the_line(robot,white_level,black_level)
 
 def follow_the_line(robot, white_level, black_level):
     """
@@ -77,13 +77,15 @@ def follow_the_line(robot, white_level, black_level):
     # TODO: 5. Use the calibrated values for white and black to calculate a light threshold to determine if your robot
     # should drive straight or turn to the right.  You will need to test and refine your code until it works well.
     # Optional extra - For a harder challenge could you drive on the black line and handle left or right turns?
-    while True:
+    for k in range(600):
         current_color = robot.color_sensor.reflected_light_intensity
-        if current_color == black_level:
-            robot.drive_right_motor(300)
-            robot.drive_left_motor(300)
+        if current_color <= black_level:
+            robot.stop()
+            robot.drive_left_motor(500)
+            robot.drive_right_motor(500)
         else:
-            break
+            robot.drive_left_motor(500)
+            robot.drive_right_motor(0)
         time.sleep(.01)
 
     robot.stop()
