@@ -110,6 +110,4 @@ class Snatch3r(object):
         ev3.Leds.set_color(side, color)
 
     def touch_sensor(self):
-        if self.ir_sensor.proximity == 0:
-            ev3.Sound.beep().wait()
-            return
+        
