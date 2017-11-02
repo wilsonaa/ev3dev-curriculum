@@ -96,7 +96,7 @@ def seek_beacon(robot):
             if current_distance == 0:
                 return True
             if current_distance< 0:
-                
+
 
 
 
