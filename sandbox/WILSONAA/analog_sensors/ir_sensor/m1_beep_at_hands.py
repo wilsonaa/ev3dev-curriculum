@@ -37,7 +37,7 @@ def main():
         # Then here you can use a command like robot.ir_sensor.proximity
 
         time.sleep(0.1)
-
+        robot
     # TODO: 3. Call over a TA or instructor to sign your team's checkoff sheet.
     #
     # Observations you should make, the instance variable robot.ir_sensor.proximity is always updating with a distance.
