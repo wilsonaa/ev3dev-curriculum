@@ -31,9 +31,9 @@ class Snatch3r(object):
         self.touch_sensor = ev3.TouchSensor()
         self.color_sensor = ev3.ColorSensor()
         self.ir_sensor = ev3.InfraredSensor()
-        self.pixy = ev3.Sensor(driver_name="pixy-lego")
+        self.beacon_seeker = ev3.BeaconSeeker()
 
-        assert self.pixy
+        assert self.beacon_seeker
         assert self.ir_sensor
         assert self.color_sensor
         assert self.touch_sensor
@@ -116,3 +116,43 @@ class Snatch3r(object):
 
             ev3.Sound.beep().wait()
             time.sleep(1.5)
+
+    def seek_beacon(self):
+        while not self.touch_sensor.is_pressed:
+            # The touch sensor can be used to abort the attempt (sometimes handy during testing)
+
+            # DONE: 3. Use the beacon_seeker object to get the current heading and distance.
+            current_heading = self.beacon_seeker.heading  # use the beacon_seeker heading
+            current_distance = self.beacon_seeker.distance  # use the beacon_seeker distance
+            if current_distance == -128:
+                # If the IR Remote is not found just sit idle for this program until it is moved.
+                print("IR Remote not found. Distance is -128")
+                self.stop()
+            else:
+
+                if math.fabs(current_heading) < 2:
+                    # Close enough of a heading to move forward
+                    print("On the right heading. Distance: ", current_distance)
+                    # You add more!
+                if current_distance <= 14:
+                    self.stop()
+                    return True
+                if current_heading < -2:
+                    if current_heading < -20:
+                        print('Heading is too far off to fix')
+                        ev3.Sound.speak("Heading is too far off to fix")
+                        self.stop()
+                        return False
+                    self.drive_right_motor(150)
+                    self.drive_left_motor(-150)
+                elif current_heading > 2:
+                    if current_heading > 20:
+                        print('Heading is too far off to fix')
+                        ev3.Sound.speak("Heading is too far off to fix")
+                        self.stop()
+                        return False
+                    self.drive_left_motor(150)
+                    self.drive_right_motor(-150)
+                else:
+                    self.drive_right_motor(150)
+                    self.drive_left_motor(150)
