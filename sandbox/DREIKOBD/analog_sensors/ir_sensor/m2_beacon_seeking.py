@@ -29,11 +29,12 @@ def main():
     robot = robo.Snatch3r()
     try:
         while True:
-            seek_beacon(robot)
+            a = seek_beacon(robot)
 
             # TODO: 5. Save the result of the seek_beacon function (a bool), then use that value to only say "Found the
             # beacon" if the return value is True.  (i.e. don't say "Found the beacon" if the attempts was cancelled.)
-            ev3.Sound.speak("Found the beacon")
+            if a == True:
+                ev3.Sound.speak("Found the beacon")
 
             command = input("Hit enter to seek the beacon again or enter q to quit: ")
             if command == "q":
@@ -55,7 +56,7 @@ def seek_beacon(robot):
       :type robot: robo.Snatch3r
       :rtype: bool
     """
-    beacon_seeker = ev3.RemoteControl(channel=1)
+    beacon_seeker = ev3.BeaconSeeker(channel=1)
     # DONE: 2. Create a BeaconSeeker object on channel 1.
 
     forward_speed = 300
@@ -93,25 +94,28 @@ def seek_beacon(robot):
                 # Close enough of a heading to move forward
                 print("On the right heading. Distance: ", current_distance)
                 # You add more!
-            if current_distance <= 3:
+            if current_distance <= 14:
+                robot.stop()
                 return True
             if current_heading < -2:
-                if current_heading <-10:
+                if current_heading <-20:
                     print('Heading is too far off to fix')
                     ev3.Sound.speak("Heading is too far off to fix")
-                    return
-                robot.drive_right_motor(400)
-                robot.drive_left_motor(-400)
+                    robot.stop()
+                    return False
+                robot.drive_right_motor(150)
+                robot.drive_left_motor(-150)
             elif current_heading > 2:
-                if current_heading >10:
+                if current_heading > 20:
                     print('Heading is too far off to fix')
                     ev3.Sound.speak("Heading is too far off to fix")
-                    return
-                robot.drive_left_motor(400)
-                robot.drive_right_motor(-400)
+                    robot.stop()
+                    return False
+                robot.drive_left_motor(150)
+                robot.drive_right_motor(-150)
             else:
-                robot.drive_right_motor(400)
-                robot.drive_left_motor(400)
+                robot.drive_right_motor(150)
+                robot.drive_left_motor(150)
 
 
 
@@ -123,7 +127,7 @@ def seek_beacon(robot):
 
 
 
-        time.sleep(0.2)
+        time.sleep(0.1)
 
     # The touch_sensor was pressed to abort the attempt if this code runs.
     print("Abandon ship!")
