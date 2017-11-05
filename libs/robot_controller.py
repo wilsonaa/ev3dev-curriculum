@@ -52,9 +52,14 @@ class Snatch3r(object):
 
     def turn_left(self,right_speed):
         assert self.right_motor
-        self.left_motor.run_forever(speed_sp=0)
+
+        self.left_motor.stop()
         self.right_motor.run_forever(speed_sp = right_speed)
 
+    def turn_right(self,left_speed):
+        assert self.left_motor
+        self.right_motor.stop()
+        self.left_motor.run_forever(speed_sp = left_speed)
 
     def drive_left_motor(self,speed):
         self.left_motor.run_forever(speed_sp = speed)

@@ -123,6 +123,10 @@ def handle_left_button(mqtt_client,right_speed_entry):
     right = int(right_speed_entry.get())
     mqtt_client.send_message('turn_left',[right])
 
+def handle_right_button(mqtt_client,left_speed_entry):
+    left = int(left_speed_entry.get())
+    mqtt_client.send_message('turn_right',[left])
+
 def handle_stop(mqtt_client):
     mqtt_client.send_message('stop')
 
