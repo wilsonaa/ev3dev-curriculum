@@ -44,8 +44,12 @@ class Snatch3r(object):
         assert self.right_motor.connected
 
     def drive_forward(self,left_speed,right_speed):
-        self.drive_left_motor(left_speed)
-        self.drive_right_motor(right_speed)
+        assert self.right_motor
+        assert self.left_motor
+
+        self.left_motor.run_forever(speed_sp=left_speed)
+        self.right_motor.run_forever(speed_sp=right_speed)
+
 
     def drive_left_motor(self,speed):
         self.left_motor.run_forever(speed_sp = speed)

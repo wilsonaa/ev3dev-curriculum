@@ -110,7 +110,10 @@ def main():
 # ----------------------------------------------------------------------
 # TODO: 4. Implement the functions for the drive button callbacks.
 def handle_forward_button(mqtt_client,left_speed_entry,right_speed_entry):
-    mqtt_client.send_message("drive_forward",[left_speed_entry,right_speed_entry])
+    left = int(left_speed_entry.get())
+    right = int(right_speed_entry.get())
+
+    mqtt_client.send_message('drive_forward',[left,right])
 
 # TODO: 5. Call over a TA or instructor to sign your team's checkoff sheet and do a code review.  This is the final one!
 #
