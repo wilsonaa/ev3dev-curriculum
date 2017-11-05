@@ -54,6 +54,8 @@ class MyDelegate(object):
 
     def __init__(self):
         self.running = True
+        self.robot = robo.Snatch3r()
+        self.mtqq_client = None
 
     def set_led(self,led_side_string,led_color_string):
 
@@ -78,6 +80,16 @@ class MyDelegate(object):
         else:
             ev3.Leds.set_color(led_side, led_color)
 
+    def loop_forever(self):
+        btn = ev3.Button()
+
+        while not btn.backspace:
+            time.sleep(0.01)
+
+        if self.mqtt_client:
+            self.mqtt_client.close()
+        self.robot.shutdown()
+
 def main():
     print("--------------------------------------------")
     print(" LED Button communication")
@@ -89,10 +101,11 @@ def main():
     # Note: you can determine the variable names that you should use by looking at the errors underlined in later code.
     # Once you have that done connect the mqtt_client to the MQTT broker using the connect_to_pc method.
     # Note: on EV3 you call connect_to_pc, but in the PC code it will call connect_to_ev3
-    robot = robo.Snatch3r
     my_delegate = MyDelegate()
     mqtt_client = com.MqttClient(my_delegate)
-    mqtt_client.connect(robot)
+    my_delegate.mqtt_client = mqtt_client
+    mqtt_client.connect_to_pc()
+    my_delegate.loop_forever()
 
     # Buttons on EV3 (these obviously assume TO DO: 3. is done)
     btn = ev3.Button()
@@ -124,6 +137,8 @@ def handle_button_press(button_state, mqtt_client, button_name):
         #   -- Pass the parameters [button_name] as a list.
         # This is meant to help you learn the mqtt_client.send_message syntax.
         # You can review the code above to understand how button_name is passed into this function.
+
+def send_message()
 
 
 # TODO: 5. Run this program on your EV3 and run m3_pc_led_button_communication.py on your PC at the same time.
