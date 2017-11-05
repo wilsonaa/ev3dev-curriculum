@@ -25,7 +25,7 @@ def main():
     # Add the pixy property to that class if you have not done so already.
     robot = robo.Snatch3r()
     robot.pixy.mode = "SIG1"
-    turn_speed = 100
+    turn_speed = 50
 
     while not robot.touch_sensor.is_pressed:
 
