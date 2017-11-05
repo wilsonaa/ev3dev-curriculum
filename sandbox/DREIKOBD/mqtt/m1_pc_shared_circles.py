@@ -80,7 +80,6 @@ def main():
     my_delegate = MyDelegate(canvas)
     mqtt_client = com.MqttClient(my_delegate)
     mqtt_client.connect("draw", "draw")
-    mqtt_client.send_message("on_circle_draw",['blue',50,50])
 
     root.mainloop()
 

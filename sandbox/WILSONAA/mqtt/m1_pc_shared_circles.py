@@ -82,8 +82,6 @@ def main():
     mqtt_client.connect("draw", "draw")
     # mqtt_client.connect("draw", "draw","broker.mqttdashboard.com")
 
-    mqtt_client.send_message("on_circle_draw",['red',50,50])
-
     root.mainloop()
 
 
