@@ -35,7 +35,7 @@ def main():
     # TODO: 2. Setup an mqtt_client.  Notice that since you don't need to receive any messages you do NOT need to have
     # a MyDelegate class.  Simply construct the MqttClient with no parameter in the constructor (easy).
     mqtt_client = com.MqttClient()
-
+    mqtt_client.connect_to_ev3()
 
     root = tkinter.Tk()
     root.title("MQTT Remote")
@@ -69,10 +69,14 @@ def main():
 
     left_button = ttk.Button(main_frame, text="Left")
     left_button.grid(row=3, column=0)
+    left_button['command'] = lambda: handle_left_button(mqtt_client, right_speed_entry)
+    root.bind('<Left>', lambda event: handle_left_button(mqtt_client,right_speed_entry))
     # left_button and '<Left>' key
 
     stop_button = ttk.Button(main_frame, text="Stop")
     stop_button.grid(row=3, column=1)
+    left_button['command'] = lambda: handle_stop(mqtt_client)
+    root.bind('<space>', lambda event: handle_stop(mqtt_client))
     # stop_button and '<space>' key (note, does not need left_speed_entry, right_speed_entry)
 
     right_button = ttk.Button(main_frame, text="Right")
@@ -114,6 +118,14 @@ def handle_forward_button(mqtt_client,left_speed_entry,right_speed_entry):
     right = int(right_speed_entry.get())
 
     mqtt_client.send_message('drive_forward',[left,right])
+
+def handle_left_button(mqtt_client,right_speed_entry):
+    right = int(right_speed_entry.get())
+    mqtt_client.send_message('turn_left',[right])
+
+def handle_stop(mqtt_client):
+    mqtt_client.send_message('stop')
+
 
 # TODO: 5. Call over a TA or instructor to sign your team's checkoff sheet and do a code review.  This is the final one!
 #
