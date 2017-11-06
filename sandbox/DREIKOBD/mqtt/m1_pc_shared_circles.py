@@ -112,10 +112,8 @@ def left_mouse_click(event, mqtt_client):
     # Review the lecture notes about the two parameters passed into the mqtt_client.send_message method if needed
     # All of your teammates should receive the message and create a circle of your color at your click location.
     # Additionally you will receive your own message and draw a circle in your color too.
-    def send_message(mqtt_client, msg_entry):
-        msg = msg_entry.get()
-        msg_entry.delete(0, 'end')
-        mqtt_client.send_message("print_message", [msg])
+
+    mqtt_client.send_message("on_circle_draw", [my_color,event.x,event.y])
 
 
         # TODO: 8. Help get everyone on your team running this program at the same time.

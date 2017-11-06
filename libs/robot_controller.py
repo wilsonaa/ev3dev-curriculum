@@ -146,31 +146,30 @@ class Snatch3r(object):
             current_distance = self.beacon_seeker.distance  # use the beacon_seeker distance
             if current_distance == -128:
                 # If the IR Remote is not found just sit idle for this program until it is moved.
-                print("IR Remote not found. Distance is -128")
-                self.stop()
+                self.drive_right_motor(150)
+                self.drive_left_motor(-150)
+            elif current_distance == 100:
+                self.drive_right_motor(150)
+                self.drive_left_motor(-150)
             else:
 
                 if math.fabs(current_heading) < 2:
                     # Close enough of a heading to move forward
                     print("On the right heading. Distance: ", current_distance)
                     # You add more!
-                if current_distance <= 14:
+                if current_distance == 0:
                     self.stop()
                     return True
                 if current_heading < -2:
                     if current_heading < -20:
-                        print('Heading is too far off to fix')
-                        ev3.Sound.speak("Heading is too far off to fix")
-                        self.stop()
-                        return False
+                        self.drive_right_motor(150)
+                        self.drive_left_motor(-150)
                     self.drive_right_motor(150)
                     self.drive_left_motor(-150)
                 elif current_heading > 2:
                     if current_heading > 20:
-                        print('Heading is too far off to fix')
-                        ev3.Sound.speak("Heading is too far off to fix")
-                        self.stop()
-                        return False
+                        self.drive_right_motor(-150)
+                        self.drive_left_motor(150)
                     self.drive_left_motor(150)
                     self.drive_right_motor(-150)
                 else:

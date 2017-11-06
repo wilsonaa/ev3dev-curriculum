@@ -30,7 +30,7 @@ def main():
 
     while not robot.touch_sensor.is_pressed:
 
-        # TODO: 3. Read the Pixy values for x, y, width, and height
+        # DONE: 3. Read the Pixy values for x, y, width, and height
         # Print the values (much like the print_pixy_readings example)
         x = robot.pixy.value(1)
         y = robot.pixy.value(2)
