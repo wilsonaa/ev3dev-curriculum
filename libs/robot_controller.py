@@ -192,18 +192,15 @@ class Snatch3r(object):
         self.running = False
 
     def find_color(self,signature):
-
+        print("--------------------------------------------")
+        print(" Color tracking")
+        print("--------------------------------------------")
+        ev3.Sound.speak("Color tracking").wait()
         print("Press the touch sensor to exit this program.")
 
+        # This code assumes you have setup the pixy object on the Snatch3r class.
+        # Add the pixy property to that class if you have not done so already.
         self.pixy.mode = signature
-        if signature == "SIG1":
-            ev3.Sound.speak("Finding Green")
-        elif signature == "SIG2":
-            ev3.Sound.speak("Finding Red")
-        elif signature == "SIG3":
-            ev3.Sound.speak("Finding Yellow")
-        elif signature == "SIG4":
-            ev3.Sound.speak("Finding Black")
         turn_speed = 50
 
         while not self.touch_sensor.is_pressed:
@@ -222,12 +219,47 @@ class Snatch3r(object):
                 break
             time.sleep(0.25)
 
-        if signature == "SIG1":
-            ev3.Sound.speak("Found Green")
-        elif signature == "SIG2":
-            ev3.Sound.speak("Found Red")
-        elif signature == "SIG3":
-            ev3.Sound.speak("Found Yellow")
-        elif signature == "SIG4":
-            ev3.Sound.speak("Found Black")
-        ev3.Sound.speak("Waiting for next command").wait()
+        print("Goodbye!")
+        ev3.Sound.speak("Goodbye").wait()
+
+    def PlayingCatch(self):
+        print("--------------------------------------------")
+        print(" Playing Catch")
+        print("--------------------------------------------")
+        ev3.Sound.speak("Playing Catch").wait()
+        print("Press the touch sensor to exit this program.")
+
+
+        self.pixy.mode = "SIG1"
+        turn_speed = 300
+
+        while not self.touch_sensor.is_pressed:
+
+            sa = self.pixy.value(3) * self.pixy.value(4)
+            if self.pixy.value(1) < 150:
+                self.drive_left_motor(-turn_speed)
+                self.drive_right_motor(turn_speed)
+            elif self.pixy.value(1) > 170:
+                self.drive_left_motor(turn_speed * .5)
+                self.drive_right_motor(-turn_speed * .5)
+            else:
+                if sa > 2500:
+                    print("Caught Object")
+                    ev3.Sound.speak("Caught Object").wait()
+                    self.stop()
+                    break
+                elif sa > 1800:
+                    self.drive_forward(turn_speed * .25, turn_speed * .25)
+
+                elif sa > 800:
+                    self.drive_forward(turn_speed * .5, turn_speed * .5)
+
+                elif sa > 500:
+                    self.drive_forward(turn_speed * .75, turn_speed * .75)
+
+                elif sa < 100:
+                    self.drive_forward(turn_speed, turn_speed)
+                time.sleep(0.25)
+
+        print("Goodbye!")
+        ev3.Sound.speak("Goodbye").wait()

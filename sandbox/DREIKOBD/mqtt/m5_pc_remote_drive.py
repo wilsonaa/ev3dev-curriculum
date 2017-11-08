@@ -82,24 +82,6 @@ def main():
     back_button.grid(row=4, column=1)
     # back_button and '<Down>' key
 
-    up_button = ttk.Button(main_frame, text="Up")
-    up_button.grid(row=5, column=0)
-    up_button['command'] = lambda: send_up(mqtt_client)
-    root.bind('<u>', lambda event: send_up(mqtt_client))
-
-    down_button = ttk.Button(main_frame, text="Down")
-    down_button.grid(row=6, column=0)
-    down_button['command'] = lambda: send_down(mqtt_client)
-    root.bind('<j>', lambda event: send_down(mqtt_client))
-
-    # Buttons for quit and exit
-    q_button = ttk.Button(main_frame, text="Quit")
-    q_button.grid(row=5, column=2)
-    q_button['command'] = (lambda: quit_program(mqtt_client, False))
-
-    e_button = ttk.Button(main_frame, text="Exit")
-    e_button.grid(row=6, column=2)
-    e_button['command'] = (lambda: quit_program(mqtt_client, True))
 
     root.mainloop()
 
