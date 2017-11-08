@@ -1,5 +1,5 @@
 """
-Author: Aaron Wilson
+Author: Aaron A. Wilson
 """
 import ev3dev.ev3 as ev3
 import time
