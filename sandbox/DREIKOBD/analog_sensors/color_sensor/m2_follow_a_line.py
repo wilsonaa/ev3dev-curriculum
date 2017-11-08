@@ -88,7 +88,7 @@ def follow_the_line(robot, white_level, black_level):
             robot.drive_right_motor(0)
         time.sleep(.01)
 
-    robot.stop()0
+    robot.stop()
     ev3.Sound.speak("Done")
 
 

@@ -190,3 +190,34 @@ class Snatch3r(object):
         # Modify a variable that will allow the loop_forever method to end. Additionally stop motors and set LEDs green.
         # The most important part of this method is given here, but you should add a bit more to stop motors, etc.
         self.running = False
+
+    def find_color(self,signature):
+        print("--------------------------------------------")
+        print(" Color tracking")
+        print("--------------------------------------------")
+        ev3.Sound.speak("Color tracking").wait()
+        print("Press the touch sensor to exit this program.")
+
+        # This code assumes you have setup the pixy object on the Snatch3r class.
+        # Add the pixy property to that class if you have not done so already.
+        self.pixy.mode = signature
+        turn_speed = 50
+
+        while not self.touch_sensor.is_pressed:
+
+            print("value1:X", self.pixy.value(1))
+            print("value2:Y", self.pixy.value(2))
+
+            if self.pixy.value(1) < 150:
+                self.drive_left_motor(-turn_speed)
+                self.drive_right_motor(turn_speed)
+            elif self.pixy.value(1) > 170:
+                self.drive_left_motor(turn_speed)
+                self.drive_right_motor(-turn_speed)
+            else:
+                self.stop()
+                break
+            time.sleep(0.25)
+
+        print("Goodbye!")
+        ev3.Sound.speak("Goodbye").wait()
