@@ -229,36 +229,36 @@ class Snatch3r(object):
         ev3.Sound.speak("Playing Catch").wait()
         print("Press the touch sensor to exit this program.")
 
-        robot = robo.Snatch3r()
-        robot.pixy.mode = "SIG1"
+
+        self.pixy.mode = "SIG1"
         turn_speed = 300
 
-        while not robot.touch_sensor.is_pressed:
+        while not self.touch_sensor.is_pressed:
 
-            sa = robot.pixy.value(3) * robot.pixy.value(4)
-            if robot.pixy.value(1) < 150:
-                robot.drive_left_motor(-turn_speed)
-                robot.drive_right_motor(turn_speed)
-            elif robot.pixy.value(1) > 170:
-                robot.drive_left_motor(turn_speed * .5)
-                robot.drive_right_motor(-turn_speed * .5)
+            sa = self.pixy.value(3) * self.pixy.value(4)
+            if self.pixy.value(1) < 150:
+                self.drive_left_motor(-turn_speed)
+                self.drive_right_motor(turn_speed)
+            elif self.pixy.value(1) > 170:
+                self.drive_left_motor(turn_speed * .5)
+                self.drive_right_motor(-turn_speed * .5)
             else:
                 if sa > 2500:
                     print("Caught Object")
                     ev3.Sound.speak("Caught Object").wait()
-                    robot.stop()
+                    self.stop()
                     break
                 elif sa > 1800:
-                    robot.drive_forward(turn_speed * .25, turn_speed * .25)
+                    self.drive_forward(turn_speed * .25, turn_speed * .25)
 
                 elif sa > 800:
-                    robot.drive_forward(turn_speed * .5, turn_speed * .5)
+                    self.drive_forward(turn_speed * .5, turn_speed * .5)
 
                 elif sa > 500:
-                    robot.drive_forward(turn_speed * .75, turn_speed * .75)
+                    self.drive_forward(turn_speed * .75, turn_speed * .75)
 
                 elif sa < 100:
-                    robot.drive_forward(turn_speed, turn_speed)
+                    self.drive_forward(turn_speed, turn_speed)
                 time.sleep(0.25)
 
         print("Goodbye!")

@@ -13,7 +13,7 @@ def main():
     main_frame = ttk.Frame(root, padding=20, relief='raised')
     main_frame.grid()
 
-    speed_label = ttk.Label(main_frame, text="Left")
+    speed_label = ttk.Label(main_frame, text="Speed")
     speed_label.grid(row=0, column=0)
     speed_entry = ttk.Entry(main_frame, width=8)
     speed_entry.insert(0, "600")
@@ -41,30 +41,41 @@ def main():
     back_button.grid(row=4, column=1)
     # back_button and '<Down>' key
 
-    up_button = ttk.Button(main_frame, text="Up")
-    up_button.grid(row=5, column=0)
-    up_button['command'] = lambda: send_up(mqtt_client)
-    root.bind('<u>', lambda event: send_up(mqtt_client))
-
-    down_button = ttk.Button(main_frame, text="Down")
-    down_button.grid(row=6, column=0)
-    down_button['command'] = lambda: send_down(mqtt_client)
-    root.bind('<j>', lambda event: send_down(mqtt_client))
-
     # Buttons for quit and exit
     q_button = ttk.Button(main_frame, text="Quit")
     q_button.grid(row=5, column=2)
     q_button['command'] = (lambda: quit_program(mqtt_client, False))
 
     Play_Catch = ttk.Button(main_frame, text="Play Catch")
-    Play_Catch.grid(row=6, column=2)
+    Play_Catch.grid(row=5, column=2)
     Play_Catch['command'] = (lambda: PlayCatch(mqtt_client))
 
     e_button = ttk.Button(main_frame, text="Exit")
     e_button.grid(row=6, column=2)
     e_button['command'] = (lambda: quit_program(mqtt_client, True))
 
-    main()
+    root.mainloop()
+def PlayCatch(mqtt_client):
+    mqtt_client.send_message("PlayCatch")
 
-    def PlayCatch(mqtt_client):
-        mqtt_client.send_message("PlayCatch")
+# Arm command callbacks
+def send_up(mqtt_client):
+    print("arm_up")
+    mqtt_client.send_message("arm_up")
+
+def send_down(mqtt_client):
+    print("arm_down")
+    mqtt_client.send_message("arm_down")
+
+# Quit and Exit button callbacks
+def quit_program(mqtt_client, shutdown_ev3):
+    if shutdown_ev3:
+        print("shutdown")
+        mqtt_client.send_message("shutdown")
+    mqtt_client.close()
+    exit()
+
+
+
+main()
+
