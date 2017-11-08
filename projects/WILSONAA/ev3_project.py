@@ -44,6 +44,10 @@ def main():
 def find_color(mqtt_client,signature):
     if signature == "SIG1":
         mqtt_client.send_message("find_color",[signature])
+    elif signature == "SIG2":
+        mqtt_client.send_message("find_color", [signature])
+    elif signature == "SIG3":
+        mqtt_client.send_message("find_color", [signature])
     elif signature == "SIG4":
         mqtt_client.send_message("find_color", [signature])
 
