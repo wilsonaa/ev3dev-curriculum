@@ -65,3 +65,6 @@ def main():
     e_button['command'] = (lambda: quit_program(mqtt_client, True))
 
     main()
+
+    def PlayCatch(mqtt_client):
+        mqtt_client.send_message("PlayCatch")
