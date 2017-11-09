@@ -221,11 +221,11 @@ class Snatch3r(object):
             time.sleep(0.25)
 
         if signature == "SIG1":
-            ev3.Sound.speak("Found Green")
+            ev3.Sound.speak("Found Green").wait()
         if signature == "SIG2":
-            ev3.Sound.speak("Found Red")
+            ev3.Sound.speak("Found Red").wait()
         if signature == "SIG3":
-            ev3.Sound.speak("Found Black")
+            ev3.Sound.speak("Found Black").wait()
         if signature == "SIG4":
             ev3.Sound.speak("Found Yellow").wait()
         ev3.Sound.speak("Waiting for next command").wait()
