@@ -134,7 +134,6 @@ def handle_right_button(mqtt_client,left_speed_entry):
 def handle_back_button(mqtt_client,left_speed_entry,right_speed_entry):
     left = -int(left_speed_entry.get())
     right = -int(right_speed_entry.get())
-
     mqtt_client.send_message('drive_forward',[left,right])
 
 def handle_stop(mqtt_client):

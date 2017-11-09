@@ -196,14 +196,21 @@ class Snatch3r(object):
 
         if signature == "SIG1":
             ev3.Sound.speak("Finding Green")
+            self.led(ev3.Leds.LEFT,ev3.Leds.GREEN)
+            self.led(ev3.Leds.RIGHT, ev3.Leds.GREEN)
         if signature == "SIG2":
-            ev3.Sound.speak("Finding Red")
+            ev3.Sound.speak("Finding Blue")
+            self.led(ev3.Leds.LEFT, ev3.Leds.BLACK)
         if signature == "SIG3":
-            ev3.Sound.speak("Finding Black")
+            ev3.Sound.speak("Finding Pink")
+            self.led(ev3.Leds.LEFT, ev3.Leds.ORANGE)
+            self.led(ev3.Leds.RIGHT, ev3.Leds.ORANGE)
         if signature == "SIG4":
             ev3.Sound.speak("Finding Yellow")
+            self.led(ev3.Leds.LEFT, ev3.Leds.YELLOW)
+            self.led(ev3.Leds.RIGHT, ev3.Leds.YELLOW)
         turn_speed = 50
-
+        self.pixy.mode = signature
         while not self.touch_sensor.is_pressed:
 
             print("value1:X", self.pixy.value(1))
@@ -222,13 +229,18 @@ class Snatch3r(object):
 
         if signature == "SIG1":
             ev3.Sound.speak("Found Green").wait()
-        if signature == "SIG2":
-            ev3.Sound.speak("Found Red").wait()
-        if signature == "SIG3":
-            ev3.Sound.speak("Found Black").wait()
-        if signature == "SIG4":
+            time.sleep(1.5)
+        elif signature == "SIG2":
+            ev3.Sound.speak("Found Blue").wait()
+            time.sleep(1.5)
+        elif signature == "SIG3":
+            ev3.Sound.speak("Found Pink").wait()
+            time.sleep(1.5)
+        elif signature == "SIG4":
             ev3.Sound.speak("Found Yellow").wait()
+            time.sleep(1.5)
         ev3.Sound.speak("Waiting for next command").wait()
+        time.sleep(1.5)
 
     def PlayingCatch(self):
         print("--------------------------------------------")
