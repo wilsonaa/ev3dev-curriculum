@@ -24,22 +24,18 @@ def main():
     green_button = ttk.Button(main_frame, text="Find Green")
     green_button.grid(row=0, column=0)
     green_button['command'] = lambda: find_color(mqtt_client, "SIG1")
-    root.bind('<g>', lambda event: green_button(mqtt_client, "SIG1"))
 
     blue_button = ttk.Button(main_frame, text="Find Blue")
     blue_button.grid(row=1, column=0)
     blue_button['command'] = lambda: find_color(mqtt_client, "SIG2")
-    root.bind('<b>', lambda event: blue_button(mqtt_client, "SIG2"))
 
     pink_button = ttk.Button(main_frame, text="Find Pink")
     pink_button.grid(row=0, column=1)
     pink_button['command'] = lambda: find_color(mqtt_client, "SIG3")
-    root.bind('<p>', lambda event: pink_button(mqtt_client, "SIG3"))
 
     yellow_button = ttk.Button(main_frame, text="Find Yellow",)
     yellow_button.grid(row=1, column=1)
     yellow_button['command'] = lambda: find_color(mqtt_client, "SIG4")
-    root.bind('<y>', lambda event: yellow_button(mqtt_client, "SIG4"))
 
     q_button = ttk.Button(main_frame, text="Exit")
     q_button.grid(row=14, column=2)
