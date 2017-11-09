@@ -192,15 +192,16 @@ class Snatch3r(object):
         self.running = False
 
     def find_color(self,signature):
-        print("--------------------------------------------")
-        print(" Color tracking")
-        print("--------------------------------------------")
-        ev3.Sound.speak("Color tracking").wait()
-        print("Press the touch sensor to exit this program.")
 
-        # This code assumes you have setup the pixy object on the Snatch3r class.
-        # Add the pixy property to that class if you have not done so already.
-        self.pixy.mode = signature
+
+        if signature == "SIG1":
+            ev3.Sound.speak("Finding Green")
+        if signature == "SIG2":
+            ev3.Sound.speak("Finding Red")
+        if signature == "SIG3":
+            ev3.Sound.speak("Finding Black")
+        if signature == "SIG4":
+            ev3.Sound.speak("Finding Yellow")
         turn_speed = 50
 
         while not self.touch_sensor.is_pressed:
@@ -219,8 +220,15 @@ class Snatch3r(object):
                 break
             time.sleep(0.25)
 
-        print("Goodbye!")
-        ev3.Sound.speak("Goodbye").wait()
+        if signature == "SIG1":
+            ev3.Sound.speak("Found Green")
+        if signature == "SIG2":
+            ev3.Sound.speak("Found Red")
+        if signature == "SIG3":
+            ev3.Sound.speak("Found Black")
+        if signature == "SIG4":
+            ev3.Sound.speak("Found Yellow").wait()
+        ev3.Sound.speak("Waiting for next command").wait()
 
     def AutoPark(self):
         print("--------------------------------------------")
