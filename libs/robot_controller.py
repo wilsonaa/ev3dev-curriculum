@@ -222,7 +222,7 @@ class Snatch3r(object):
         print("Goodbye!")
         ev3.Sound.speak("Goodbye").wait()
 
-    def PlayingCatch(self):
+    def AutoPark(self):
         print("--------------------------------------------")
         print(" Playing Catch")
         print("--------------------------------------------")
@@ -236,6 +236,7 @@ class Snatch3r(object):
         while not self.touch_sensor.is_pressed:
 
             sa = self.pixy.value(3) * self.pixy.value(4)
+
             if self.pixy.value(1) < 150:
                 self.drive_left_motor(-turn_speed)
                 self.drive_right_motor(turn_speed)
