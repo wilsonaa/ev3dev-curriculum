@@ -254,7 +254,7 @@ class Snatch3r(object):
         while not self.touch_sensor.is_pressed:
 
             sa = self.pixy.value(3) * self.pixy.value(4)
-            if sa > 5000:
+            if sa > 3500:
                 self.stop()
                 break
             elif sa > 2000:
@@ -266,7 +266,7 @@ class Snatch3r(object):
             elif sa > 500:
                 self.drive_forward(turn_speed * .75, turn_speed * .75)
 
-            elif sa < 100:
+            elif sa < 200:
                 self.drive_forward(turn_speed, turn_speed)
             time.sleep(0.25)
 
@@ -275,19 +275,19 @@ class Snatch3r(object):
 
     def AutoAim(self):
         print("--------------------------------------------")
-        print("AutoPark")
+        print("Auto Aim")
         print("--------------------------------------------")
-        ev3.Sound.speak("AutoPark").wait()
+        ev3.Sound.speak("Auto Aim").wait()
 
         self.pixy.mode = "SIG1"
         turn_speed = 300
 
         while not self.touch_sensor.is_pressed:
 
-            if self.pixy.value(1) < 150:
-                self.drive_left_motor(-turn_speed)
-                self.drive_right_motor(turn_speed)
-            elif self.pixy.value(1) > 170:
+            if self.pixy.value(1) < 155:
+                self.drive_left_motor(-turn_speed*.5)
+                self.drive_right_motor(turn_speed*.5)
+            elif self.pixy.value(1) > 165:
                 self.drive_left_motor(turn_speed * .5)
                 self.drive_right_motor(-turn_speed * .5)
 

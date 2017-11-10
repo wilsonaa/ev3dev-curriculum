@@ -58,7 +58,7 @@ def main():
     stop_button = ttk.Button(main_frame, text="Stop")
     stop_button.grid(row=6, column=2)
     stop_button['command'] = lambda: handle_stop(mqtt_client)
-    root.bind('<space>', lambda event: handle_stop(mqtt_client))
+    root.bind('<b>', lambda event: handle_stop(mqtt_client))
 
     right_button = ttk.Button(main_frame, text="Right")
     right_button.grid(row=6, column=3)
@@ -88,12 +88,12 @@ def main():
     AutoPark_button = ttk.Button(main_frame, text="AutoPark")
     AutoPark_button.grid(row=6, column=0)
     AutoPark_button['command'] = lambda: AutoPark(mqtt_client)
-    root.bind(lambda event: AutoPark(mqtt_client))
+    root.bind('<,>',lambda event: AutoPark(mqtt_client))
 
     AutoAim_button = ttk.Button(main_frame, text="AutoAim")
     AutoAim_button.grid(row=7, column=0)
     AutoAim_button['command'] = lambda: AutoAim(mqtt_client)
-    root.bind( lambda event: AutoAim(mqtt_client))
+    root.bind('<.>', lambda event: AutoAim(mqtt_client))
     root.mainloop()
 
 def handle_send_message(mqtt_client,msg_entry):
