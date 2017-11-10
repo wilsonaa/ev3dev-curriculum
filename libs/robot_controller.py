@@ -244,11 +244,9 @@ class Snatch3r(object):
 
     def AutoPark(self):
         print("--------------------------------------------")
-        print(" Playing Catch")
+        print("AutoPark")
         print("--------------------------------------------")
-        ev3.Sound.speak("Playing Catch").wait()
-        print("Press the touch sensor to exit this program.")
-
+        ev3.Sound.speak("AutoPark").wait()
 
         self.pixy.mode = "SIG1"
         turn_speed = 300
@@ -256,6 +254,35 @@ class Snatch3r(object):
         while not self.touch_sensor.is_pressed:
 
             sa = self.pixy.value(3) * self.pixy.value(4)
+            if sa > 5000:
+                self.stop()
+                break
+            elif sa > 2000:
+                self.drive_forward(turn_speed * .25, turn_speed * .25)
+
+            elif sa > 1000:
+                self.drive_forward(turn_speed * .5, turn_speed * .5)
+
+            elif sa > 500:
+                self.drive_forward(turn_speed * .75, turn_speed * .75)
+
+            elif sa < 100:
+                self.drive_forward(turn_speed, turn_speed)
+            time.sleep(0.25)
+
+        print("Parked")
+        ev3.Sound.speak("Parked").wait()
+
+    def AutoAim(self):
+        print("--------------------------------------------")
+        print("AutoPark")
+        print("--------------------------------------------")
+        ev3.Sound.speak("AutoPark").wait()
+
+        self.pixy.mode = "SIG1"
+        turn_speed = 300
+
+        while not self.touch_sensor.is_pressed:
 
             if self.pixy.value(1) < 150:
                 self.drive_left_motor(-turn_speed)
@@ -263,24 +290,16 @@ class Snatch3r(object):
             elif self.pixy.value(1) > 170:
                 self.drive_left_motor(turn_speed * .5)
                 self.drive_right_motor(-turn_speed * .5)
+
             else:
-                if sa > 2500:
-                    print("Caught Object")
-                    ev3.Sound.speak("Caught Object").wait()
-                    self.stop()
-                    break
-                elif sa > 1800:
-                    self.drive_forward(turn_speed * .25, turn_speed * .25)
+                self.stop()
+                break
+            time.sleep(0.25)
+        print("On Target")
+        ev3.Sound.speak("On Target").wait()
 
-                elif sa > 800:
-                    self.drive_forward(turn_speed * .5, turn_speed * .5)
-
-                elif sa > 500:
-                    self.drive_forward(turn_speed * .75, turn_speed * .75)
-
-                elif sa < 100:
-                    self.drive_forward(turn_speed, turn_speed)
-                time.sleep(0.25)
-
-        print("Goodbye!")
-        ev3.Sound.speak("Goodbye").wait()
+    def Speak(self,msg):
+        print("--------------------------------------------")
+        print("Speaking")
+        print("--------------------------------------------")
+        ev3.Sound.speak("%d",msg).wait()
