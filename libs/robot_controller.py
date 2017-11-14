@@ -244,34 +244,34 @@ class Snatch3r(object):
 
     def AutoPark(self):
         print("--------------------------------------------")
-        print("AutoPark")
+        print("Cruise Control")
         print("--------------------------------------------")
-        ev3.Sound.speak("AutoPark").wait()
+        ev3.Sound.speak("Cruise Control").wait()
 
         self.pixy.mode = "SIG1"
-        turn_speed = 300
+        turn_speed = 500
 
         while not self.touch_sensor.is_pressed:
 
             sa = self.pixy.value(3) * self.pixy.value(4)
-            if sa > 3500:
+            if sa > 1500:
                 self.stop()
+                print("Too Close")
+                ev3.Sound.speak("Too Close").wait()
                 break
-            elif sa > 2000:
+            elif sa >1000:
                 self.drive_forward(turn_speed * .25, turn_speed * .25)
 
-            elif sa > 1000:
+            elif sa > 500:
                 self.drive_forward(turn_speed * .5, turn_speed * .5)
 
-            elif sa > 500:
+            elif sa > 300:
                 self.drive_forward(turn_speed * .75, turn_speed * .75)
 
             elif sa < 200:
                 self.drive_forward(turn_speed, turn_speed)
             time.sleep(0.25)
 
-        print("Parked")
-        ev3.Sound.speak("Parked").wait()
 
     def AutoAim(self):
         print("--------------------------------------------")
@@ -302,4 +302,4 @@ class Snatch3r(object):
         print("--------------------------------------------")
         print("Speaking")
         print("--------------------------------------------")
-        ev3.Sound.speak("%d",msg).wait()
+        ev3.Sound.speak("%s" % msg).wait()
